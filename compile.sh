@@ -38,3 +38,6 @@ while read -r DIR; do
   fi
 
 done < <(find Movies/* -type d)
+
+# Remove .DS_Store files
+find . -name ".DS_Store" -delete

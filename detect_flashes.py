@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import AppKit
 import os
+import sys
 import csv
 
 WINDOW_NAME = "Frame"
@@ -12,17 +13,18 @@ DIFF_THRESHOLD = 40
 FLASH_END_BRIGHTNESS_DIFF = 10
 FLASH_MAX_DURATION_MS = 300
 
-FLASH_OFFSET_MS = 750
+# FLASH_OFFSET_MS = 750
+FLASH_OFFSET_MS = 0
 
 SHOW_IMAGES = False
 
-# video_filename = sys.argv[1]
-# movie_name = sys.argv[2]
-video_filename = "/Users/ndbroadbent/Downloads/Movies/Ready Player One (2018) [WEBRip] [720p] [YTS.AM]/Ready.Player.One.2018.720p.WEBRip.x264-[YTS.AM].mp4"
-movie_name = "Ready Player One (2018)"
+video_filename = sys.argv[1]
+movie_name = sys.argv[2]
+# video_filename = "/Users/ndbroadbent/Downloads/TopGunMaverick.mkv"
+# movie_name = "Top Gun Maverick"
 
 brightness_csv_filename = f"Movies/{movie_name}/brightness.csv"
-strobe_commands_csv_filename = f"Movies/{movie_name}/strobe_commands.txt"
+strobe_commands_csv_filename = f"Movies/{movie_name}/detected_flashes.txt"
 
 def formatted_timestamp(timestamp_ms, include_ms=True):
     ms_string = ""
