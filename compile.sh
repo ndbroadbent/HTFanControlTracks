@@ -21,16 +21,20 @@ while read -r DIR; do
   # mkdir -p build/"$MOVIE_NAME"
   echo "Converting smoke/strobe track..."
 
-  sed -e "s/,SMOKE_ON/,ECO/g" \
-      -e "s/,SMOKE_OFF/,OFF/g" \
-      -e "s/,STROBE_FLASH/,LOW/g" \
-    "$DIR"/smoke_strobe_commands.txt > build/commands.txt
+  if [ -f "$DIR"/smoke_strobe_commands.txt ]; then
+    sed -e "s/,SMOKE_ON/,ECO/g" \
+        -e "s/,SMOKE_OFF/,OFF/g" \
+        -e "s/,STROBE_FLASH/,LOW/g" \
+        -e "s/,BUBBLE_ON/,MED/g" \
+        -e "s/,CREDITS/,HIGH/g" \
+      "$DIR"/smoke_strobe_commands.txt > build/commands.txt
 
-  #cat build/commands.txt
-  rm -f "SmokeStrobeTracks/${MOVIE_NAME}.zip"
-  (
-    cd build
-    zip "../SmokeStrobeTracks/${MOVIE_NAME}.zip" ./*
-  )
+    #cat build/commands.txt
+    rm -f "SmokeStrobeTracks/${MOVIE_NAME}.zip"
+    (
+      cd build
+      zip "../SmokeStrobeTracks/${MOVIE_NAME}.zip" ./*
+    )
+  fi
 
 done < <(find Movies/* -type d)
