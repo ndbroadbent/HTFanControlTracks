@@ -8,20 +8,22 @@ while read -r DIR; do
 
   echo "$MOVIE_NAME"
 
-  rm -rf build/*
-  # mkdir -p build/"$MOVIE_NAME"
-  cp "$DIR"/wind_commands.txt build/commands.txt
-  rm -f "WindTracks/${MOVIE_NAME}.zip"
-  (
-    cd build
-    zip "../WindTracks/${MOVIE_NAME}.zip" ./*
-  )
-
-  rm -rf build/*
-  # mkdir -p build/"$MOVIE_NAME"
-  echo "Converting smoke/strobe track..."
+  if [ -f "$DIR"/wind_commands.txt ]; then
+    echo "Compiling wind track..."
+    rm -rf build/*
+    # mkdir -p build/"$MOVIE_NAME"
+    cp "$DIR"/wind_commands.txt build/commands.txt
+    rm -f "WindTracks/${MOVIE_NAME}.zip"
+    (
+      cd build
+      zip "../WindTracks/${MOVIE_NAME}.zip" ./*
+    )
+  fi
 
   if [ -f "$DIR"/smoke_strobe_commands.txt ]; then
+    rm -rf build/*
+    # mkdir -p build/"$MOVIE_NAME"
+    echo "Converting smoke/strobe track..."
     sed -e "s/,SMOKE_ON/,ECO/g" \
         -e "s/,SMOKE_OFF/,OFF/g" \
         -e "s/,STROBE_FLASH/,LOW/g" \
