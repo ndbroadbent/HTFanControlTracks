@@ -28,9 +28,9 @@ while read -r DIR; do
     fi
   } > build/commands.txt
 
-  cat build/commands.txt
-  echo
-  echo "--------------------------------"
+  # cat build/commands.txt
+  # echo
+  # echo "--------------------------------"
   echo
 
   rm -f "CombinedTracks/${MOVIE_NAME}.zip"
