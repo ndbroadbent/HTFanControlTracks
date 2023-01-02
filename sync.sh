@@ -1,5 +1,4 @@
 #!/bin/bash
 set -euo pipefail
 
-rsync -rv WindTracks/        root@debian-server.local:/opt/HTFanControl/windtracks
-rsync -rv SmokeStrobeTracks/ root@debian-server.local:/opt/HTFanControlSmokeStrobe/windtracks
+rsync -rv CombinedTracks/        root@debian-server.local:/opt/HTFanControl/HTFanControl/bin/Debug/net5.0-windows7.0/windtracks/

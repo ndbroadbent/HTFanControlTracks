@@ -1,7 +1,3 @@
-# Spring - Blender Open Movie (2019)
-# 1080p YouTube (00:07:44)
-# Coded by: Nathan Broadbent
-
 00:01:17,SMOKE_ON
 00:01:23,SMOKE_OFF
 00:02:55,SMOKE_ON

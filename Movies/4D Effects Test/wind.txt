@@ -1,7 +1,3 @@
-# 4D Effects Test (2022)
-# iMovie (00:00:56)
-# Coded by: Nathan Broadbent
-
 00:00:19.080,ECO
 00:00:21.520,OFF
 00:00:26.120,LOW

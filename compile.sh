@@ -7,38 +7,37 @@ while read -r DIR; do
   MOVIE_NAME="${DIR/Movies\//}"
 
   echo "$MOVIE_NAME"
+  echo "Combining wind/effects tracks..."
+  echo
 
-  if [ -f "$DIR"/wind_commands.txt ]; then
-    echo "Compiling wind track..."
-    rm -rf build/*
-    # mkdir -p build/"$MOVIE_NAME"
-    cp "$DIR"/wind_commands.txt build/commands.txt
-    rm -f "WindTracks/${MOVIE_NAME}.zip"
-    (
-      cd build
-      zip "../WindTracks/${MOVIE_NAME}.zip" ./*
-    )
-  fi
+  rm -rf build/*
+  # mkdir -p build/"$MOVIE_NAME"
 
-  if [ -f "$DIR"/smoke_strobe_commands.txt ]; then
-    rm -rf build/*
-    # mkdir -p build/"$MOVIE_NAME"
-    echo "Converting smoke/strobe track..."
-    sed -e "s/,SMOKE_ON/,ECO/g" \
-        -e "s/,SMOKE_OFF/,OFF/g" \
-        -e "s/,STROBE_FLASH/,LOW/g" \
-        -e "s/,BUBBLE_ON/,MED/g" \
-        -e "s/,CREDITS/,HIGH/g" \
-      "$DIR"/smoke_strobe_commands.txt > build/commands.txt
+  {
+    if [ -f "$DIR"/header.txt ]; then
+      cat "$DIR"/header.txt
+      echo
+    fi
+    if [ -f "$DIR"/wind.txt ]; then
+      cat "$DIR"/wind.txt
+      echo
+    fi
+    if [ -f "$DIR"/effects.txt ]; then
+      echo "// Effects"
+      cat "$DIR"/effects.txt
+    fi
+  } > build/commands.txt
 
-    #cat build/commands.txt
-    rm -f "SmokeStrobeTracks/${MOVIE_NAME}.zip"
-    (
-      cd build
-      zip "../SmokeStrobeTracks/${MOVIE_NAME}.zip" ./*
-    )
-  fi
+  cat build/commands.txt
+  echo
+  echo "--------------------------------"
+  echo
 
+  rm -f "CombinedTracks/${MOVIE_NAME}.zip"
+  (
+    cd build
+    zip "../CombinedTracks/${MOVIE_NAME}.zip" ./*
+  )
 done < <(find Movies/* -type d)
 
 # Remove .DS_Store files
